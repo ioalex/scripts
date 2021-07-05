@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+# shellcheck disable=SC2155,SC2016
+
+# This script is called on by i3 to set a screensaver when the system is locked.
+
+# export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
+
+# Run xidlehook
+if ! command -v xidlehook -a ! command -v betterlockscreen &> /dev/null;
+then
+  echo "xidlehook and betterlockscreen could not be found"
+  exit
+else
+  xidlehook \
+  `# Detect when the system wakes up from a suspend and reset the idle timer` \
+  --detect-sleep \
+  `# Don't lock when there's a fullscreen application` \
+  --not-when-fullscreen \
+  `# Don't lock when there's audio playing` \
+  --not-when-audio \
+  `# Dim the screen after 120 seconds, undim if user becomes active` \
+  --timer 120 \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness .1' \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+  `# Undim & lock after 30 more seconds` \
+  --timer 30 \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; betterlockscreen -l dim' \
+    '' \
+  `# Finally, suspend an hour after it locks` \
+  --timer 3600 \
+    'systemctl suspend' \
+    '' \
+  `# Start xidlehook with a socket argument` \
+  --socket "/tmp/xidlehook.sock"
+fi

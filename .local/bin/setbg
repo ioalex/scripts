@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# This script is called on startup to set a desktop wallpaper.
+
+# Randomise and fill
+# shellcheck source=/dev/null
+# feh --bg-fill --randomize ~/Pictures/Wallpapers/*
+
+feh --bg-fill ~/Pictures/Wallpapers/wallhaven-g7z7gd.jpg
