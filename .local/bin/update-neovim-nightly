@@ -1,5 +1,8 @@
 #!/bin/bash
+# shellcheck shell=bash
+# shellcheck disable=SC2050,2059,2086,2006,2001,2162
 
+# Installs / Updates latest Neovim Nightly version
 # All credits go to ecosse3
 # Source: <https://gist.github.com/ecosse3/ab58a8577d8c69dccdf03304b720e1c8>
 
