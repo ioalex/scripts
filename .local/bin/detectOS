@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+UNAMECHECK=$(uname -r);
+
+if [[ $UNAMECHECK == *"microsoft"* ]] && [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	echo "This machine is running WSL"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	echo "This is a Linux machine"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	echo "This is a Mac machine"
+else
+	echo "This didn't work"
+fi
