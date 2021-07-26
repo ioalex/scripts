@@ -2,7 +2,7 @@
 
 UNAMECHECK=$(uname -r);
 
-if [[ $UNAMECHECK == *"microsoft"* ]] && [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [[ $UNAMECHECK == *[mM]"icrosoft"* ]] && [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "This machine is running WSL"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	echo "This is a Linux machine"
