@@ -3,11 +3,12 @@
 # shellcheck disable=SC2155,SC2016
 
 # This script is called on by i3 to set a screensaver when the system is locked.
+# Currently configured for multihead display.
 
 # export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
 
-PRIMARY_DISPLAY="DP-0"
-SECONDARY_DISPLAY="HDMI-0"
+PRIMARY_DISPLAY=$(xrandr --listactivemonitors | awk '/ 0:/{print $4}')
+SECONDARY_DISPLAY=$(xrandr --listactivemonitors | awk '/ 1:/{print $4}')
 
 # Run xidlehook
 if ! command -v xidlehook -a ! command -v betterlockscreen &> /dev/null;
