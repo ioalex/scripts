@@ -7,4 +7,6 @@
 # shellcheck source=/dev/null
 # feh --bg-fill --randomize ~/Pictures/Wallpapers/*
 
-feh --bg-fill ~/Pictures/Wallpapers/wallhaven-g7z7gd.jpg
+# feh --bg-fill ~/Pictures/Wallpapers/0008.jpg
+
+feh --bg-scale --no-xinerama ~/Pictures/Wallpapers/3840x1080/0005.jpeg
