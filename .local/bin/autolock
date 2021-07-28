@@ -6,10 +6,13 @@
 
 # export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
 
+PRIMARY_DISPLAY="DP-0"
+SECONDARY_DISPLAY="HDMI-0"
+
 # Run xidlehook
 if ! command -v xidlehook -a ! command -v betterlockscreen &> /dev/null;
 then
-  echo "xidlehook and betterlockscreen could not be found"
+  echo "xidlehook and betterlockscreen could not be found!"
   exit
 else
   xidlehook \
@@ -20,17 +23,17 @@ else
   `# Don't lock when there's audio playing` \
   --not-when-audio \
   `# Dim the screen after 120 seconds, undim if user becomes active` \
-  --timer 120 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness .1' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+  --timer 180 \
+    "xrandr --output ${PRIMARY_DISPLAY} --brightness .1; xrandr --output ${SECONDARY_DISPLAY} --brightness .1" \
+    "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1" \
   `# Undim & lock after 30 more seconds` \
   --timer 30 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; betterlockscreen -l dim' \
-    '' \
+    "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1; betterlockscreen -l dim" \
+    "" \
   `# Finally, suspend an hour after it locks` \
   --timer 3600 \
-    'systemctl suspend' \
-    '' \
+    "systemctl suspend" \
+    "" \
   `# Start xidlehook with a socket argument` \
   --socket "/tmp/xidlehook.sock"
 fi
