@@ -3,4 +3,4 @@
 
 # Setup multi-head displays for hostname: archbtw
 
-xrandr --auto --output DP-0 --mode 1920x1080 --rate 144.00 --right-of HDMI-0
+xrandr --auto --output DP-0 --mode 1920x1080 --rate 144.00 --right-of DP-4
