@@ -3,10 +3,22 @@
 
 # This script is called on startup to set a desktop wallpaper.
 
+# FEH BACKGROUND SETTING
+# --bg-center: Center the file on the background. If it is too small, it will be surrounded by a border.
+# --bg-fill: Like --bg-scale, but preserves aspect ratio by zooming the image until it fits.
+# --bg-max: Like --big-fill, but scale the image to the maximum size that fits the screen with borders on one side.
+# --bg-scale: Fit the file into the background without repeating it, cutting off stuff or using borders.
+# --bg-tile: Tile (repeat) the image in case it is too small for the screen.
+# --no-fehbg: Do not write a ~/.fehbg file
+# --no-xinerama: Treat the whole X display as one screen.
+
 # Randomise and fill
 # shellcheck source=/dev/null
 # feh --bg-fill --randomize ~/Pictures/Wallpapers/*
 
+# Great looking wallpaper!
+# shellcheck source=/dev/null
 # feh --bg-fill ~/Pictures/Wallpapers/0008.jpg
 
-feh --bg-scale --no-xinerama ~/Pictures/Wallpapers/3840x1080/0005.jpeg
+# shellcheck source=/dev/null
+feh --no-fehbg --bg-scale --no-xinerama ~/Pictures/Wallpapers/3840x1080/0005.jpeg
