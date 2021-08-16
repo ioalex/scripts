@@ -14,4 +14,13 @@ setxkbmap -option caps:escape
 xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
 
 # Load key mappings
-sxhkd
+APP_NAME=sxhkd
+
+# Terminate already running bar instances
+killall -q $APP_NAME
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x $APP_NAME >/dev/null; do sleep 1; done
+
+# Launch sxhkd
+$APP_NAME & disown
