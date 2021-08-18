@@ -21,4 +21,5 @@
 # feh --bg-fill ~/Pictures/Wallpapers/0008.jpg
 
 # shellcheck source=/dev/null
-feh --no-fehbg --bg-scale --no-xinerama ~/Pictures/Wallpapers/3840x1080/0005.jpeg
+# wallpaper 0006.jpg (5472x3648)
+feh --no-fehbg --bg-scale --no-xinerama ~/Pictures/Wallpapers/3840x1080/0006.jpg
