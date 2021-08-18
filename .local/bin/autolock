@@ -16,25 +16,50 @@ then
   echo "xidlehook and betterlockscreen could not be found!"
   exit
 else
-  xidlehook \
-  `# Detect when the system wakes up from a suspend and reset the idle timer` \
-  --detect-sleep \
-  `# Don't lock when there's a fullscreen application` \
-  --not-when-fullscreen \
-  `# Don't lock when there's audio playing` \
-  --not-when-audio \
-  `# Dim the screen after 120 seconds, undim if user becomes active` \
-  --timer 180 \
-    "xrandr --output ${PRIMARY_DISPLAY} --brightness .1; xrandr --output ${SECONDARY_DISPLAY} --brightness .1" \
-    "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1" \
-  `# Undim & lock after 30 more seconds` \
-  --timer 30 \
-    "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1; betterlockscreen -l dim" \
-    "" \
-  `# Finally, suspend an hour after it locks` \
-  --timer 3600 \
-    "systemctl suspend" \
-    "" \
-  `# Start xidlehook with a socket argument` \
-  --socket "/tmp/xidlehook.sock"
+  if command -v redshift &> /dev/null; then
+    APP_NAME=redshift
+    xidlehook \
+    `# Detect when the system wakes up from a suspend and reset the idle timer` \
+    --detect-sleep \
+    `# Don't lock when there's a fullscreen application` \
+    --not-when-fullscreen \
+    `# Don't lock when there's audio playing` \
+    --not-when-audio \
+    `# Dim the screen after 120 seconds, undim if user becomes active` \
+    --timer 180 \
+      "killall -q $APP_NAME; while pgrep -u $UID -x $APP_NAME >/dev/null; do sleep 1; done; redshift -b 0.2" \
+      "source '${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME/launch.sh'" \
+    `# Undim & lock after 30 more seconds` \
+    --timer 30 \
+      "'${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME/launch.sh'; betterlockscreen -l dim" \
+      "" \
+    `# Finally, suspend an hour after it locks` \
+    --timer 3600 \
+      "systemctl suspend" \
+      "" \
+    `# Start xidlehook with a socket argument` \
+    --socket "/tmp/xidlehook.sock"
+  else
+    xidlehook \
+    `# Detect when the system wakes up from a suspend and reset the idle timer` \
+    --detect-sleep \
+    `# Don't lock when there's a fullscreen application` \
+    --not-when-fullscreen \
+    `# Don't lock when there's audio playing` \
+    --not-when-audio \
+    `# Dim the screen after 120 seconds, undim if user becomes active` \
+    --timer 180 \
+      "xrandr --output ${PRIMARY_DISPLAY} --brightness .1; xrandr --output ${SECONDARY_DISPLAY} --brightness .1" \
+      "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1" \
+    `# Undim & lock after 30 more seconds` \
+    --timer 30 \
+      "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1; betterlockscreen -l dim" \
+      "" \
+    `# Finally, suspend an hour after it locks` \
+    --timer 3600 \
+      "systemctl suspend" \
+      "" \
+    `# Start xidlehook with a socket argument` \
+    --socket "/tmp/xidlehook.sock"
+  fi
 fi
