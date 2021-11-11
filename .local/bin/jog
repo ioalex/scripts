@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+# Source: <https://github.com/natethinks/jog>
+
+# Simple script to print the last 10 commands you ran in the current directory
+
+grep -v "jog" ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f1 -d"|" | tail
