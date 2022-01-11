@@ -4,4 +4,4 @@
 
 # Simple script to print the last 10 commands you ran in the current directory
 
-grep -v "jog" ~/.zsh_history_ext | grep -a --color=never "${PWD}   " | cut -f1 -d"|" | tail
+grep -v "jog" $ZSH_HISTORY_DIR/history | grep -a --color=never "${PWD}   " | cut -f1 -d"|" | tail
