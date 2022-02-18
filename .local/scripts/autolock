@@ -31,7 +31,7 @@ else
       "source '${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME/launch.sh'" \
     `# Undim & lock after 30 more seconds` \
     --timer 30 \
-      "'${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME/launch.sh'; betterlockscreen -l dim" \
+      "'${XDG_CONFIG_HOME:-$HOME/.config}/$APP_NAME/launch.sh'; betterlockscreen -l dim --display 1 --span --off 2" \
       "" \
     `# Finally, suspend an hour after it locks` \
     --timer 3600 \
@@ -53,7 +53,7 @@ else
       "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1" \
     `# Undim & lock after 30 more seconds` \
     --timer 30 \
-      "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1; betterlockscreen -l dim" \
+      "xrandr --output ${PRIMARY_DISPLAY} --brightness 1; xrandr --output ${SECONDARY_DISPLAY} --brightness 1; betterlockscreen -l dim --display 1 --span --off 2" \
       "" \
     `# Finally, suspend an hour after it locks` \
     --timer 3600 \

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# Create new web project & launch tmux session.
+
+project="$PROJECTS/Web-Development/$1"
+
+mkdir "$project"
+cd "$project" || exit
+git init
+tat
