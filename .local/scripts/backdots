@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+DATE=$(date +%d-%m-%Y)
+
+if [ -d "$HOME/pCloudDrive/Backup/" ]; then
+  BACKUP_DIR="$HOME/pCloudDrive/Backup/"
+else
+  exit
+fi
+
+# take each website's backup in separate name, use below format #
+tar -zcvpf "$BACKUP_DIR/dotfiles-$DATE.tar.gz" "$HOME/dotfiles/"
+
+# Delete files older than 10 days #
+find $BACKUP_DIR/* -mtime +10 -exec rm {} \;
