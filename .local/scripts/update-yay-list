@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+
+# Update list of explicitly installed Arch & AUR packages.
+
+yay -Qe >~/dotfiles/@arch/.config/.pacman.list
+
+echo "updated ~/.config/.pacman.list"
