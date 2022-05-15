@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 sudo pacman -Sc
-sudo pacman -Rns $(pacman -Qtdq)
+sudo pacman -Rns "$(pacman -Qtdq)"
 #rmlint /home/alex
 #echo `To execute rmlint script use "sh -c rmlint.sh"`
 duf
